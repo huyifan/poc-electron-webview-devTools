@@ -1,0 +1,27 @@
+<html>
+<head>
+    <style type="text/css">
+        * { margin: 0; }
+        #browser { height: 70%; }
+        #devtools { height: 30%; }
+    </style>
+</head>
+<body>
+<webview id="browser" src="https://github.com"></webview>
+
+<script>
+    const electron =require('electron')
+    const browserDom=document.getElementById('browser')
+    const ipc = electron.ipcRenderer;
+
+    //!!ATTENTION PLEASE!!
+    //if you want use webView in html.when create the window which load  html file include <webView> Tag
+    //you must add  [webviewTag: true] in webPreferences of window construct
+    //otherwise the webView tag will not work
+
+    browserDom.addEventListener('dom-ready', () => {
+        ipc.send('dom-ready')
+    })
+</script>
+</body>
+</html>
